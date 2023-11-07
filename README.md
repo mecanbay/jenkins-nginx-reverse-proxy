@@ -3,7 +3,7 @@
 * Add your SSL Certificate to the `nginx/ssl/examplecom.crt` file.
 * Add your SSL Key to the `nginx/ssl/examplecom.key` file.
 
-Creating the jenkins/data directory :
+Creating the `jenkins/data` directory :
 ```sh
 mkdir -p jenkins/data
 ```
