@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      -  JENKINS=jenkins
+    volumes:
+      - ./nginx/ssl:/etc/nginx/ssl
+      - ./nginx/templates:/etc/nginx/templates
+    networks:
+      - internal-network
+    restart: always
+  jenkins:
+    image: jenkins/jenkins:lts-jdk11
+    container_name: jenkins
+    volumes:
+      - ./jenkins/data/:/var/jenkins_home
+    networks:
+      - internal-network
+    ports:
+      - 8080:8080
+      - 50000:50000
+    restart: always
+    depends_on:
+      - nginx
+networks:
+  waa2-jenkins-network:
+    driver: bridge
